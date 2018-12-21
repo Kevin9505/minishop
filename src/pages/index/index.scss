@@ -1,0 +1,25 @@
+.index{
+  .slide-image{
+    width: 100%;
+    height: 340rpx;
+    display: block;
+  }
+  .menus{
+    padding: 24rpx 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .menu-list{
+      width: 128rpx;
+      height: 140rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        width: 80%;
+        height: 80%;
+        display: block;
+      }
+    }
+  }
+}

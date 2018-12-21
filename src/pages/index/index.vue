@@ -1,9 +1,16 @@
 <template>
-  <div>首页</div>
+  <div class="index">
+    <dd-search></dd-search>
+    首页
+  </div>
 </template>
 
 <script>
+import search from '@/components/search/search.vue'
 export default {
+  components: {
+    'dd-search': 'search'
+  }
 }
 </script>
 

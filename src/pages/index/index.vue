@@ -51,7 +51,7 @@
             class="right-item"
             v-if="list!==0"
             :open-type="contentItem.open_type" :url="contentItem.navigator_url" v-for="(contentItem, list) in floorItem.product_list" :key="list">
-              <img :src="contentItem.image_src" :alt="contentItem.name" mode="aspectFill">
+              <img :src="contentItem.image_src" :alt="contentItem.name">
             </navigator>
           </div>
         </div>
@@ -61,7 +61,8 @@
 </template>
 
 <script>
-import search from "@/components/search/search.vue";
+import search from "@/components/search/search.vue"
+import request from '@/utils/request.js'
 export default {
   data () {
     return {
@@ -71,38 +72,80 @@ export default {
     }
   },
   mounted () {
-    wx.request({
-      url: 'https://itjustfun.cn/api/public/v1/home/swiperdata',
-      success: (res) => {
+    // wx.request({
+    //   url: 'https://itjustfun.cn/api/public/v1/home/swiperdata',
+    //   success: (res) => {
+    //     const {meta} = res.data
+    //     if (meta.status === 200) {
+    //       const {data} = res.data
+    //       this.imgUrls = data
+    //     }
+    //   }
+    // })
+    // wx.request({
+    //   url: 'https://itjustfun.cn/api/public/v1/home/catitems',
+    //   success: (res) => {
+    //     // console.log(res)
+    //     const {meta} = res.data
+    //     if (meta.status === 200) {
+    //       const {data} = res.data
+    //       this.menus = data
+    //     }
+    //   }
+    // })
+    // wx.request({
+    //   url: 'https://www.zhengzhicheng.cn/api/public/v1/home/floordata',
+    //   success: (res) => {
+    //     // console.log(res)
+    //     const {meta} = res.data
+    //     if (meta.status === 200) {
+    //       const {message} = res.data
+    //       this.floorData = message
+    //     }
+    //   }
+    // })
+    this.getData()
+  },
+  methods: {
+    // async await
+    // async 放置在一个函数前面,意味着这个函数总是返回一个promise,如果代码中有return <非promise>语句，JavaScript会自动把返回的这个value值包装成promise的resolved值。
+    // await可以让JavaScript进行等待，直到一个promise执行并返回它的结果，JavaScript才会继续往下执行。
+    // try{}catch(err){} 捕获代码块错误信息
+    async getData () {
+      try{
+        let res = await request('https://itjustfun.cn/api/public/v1/home/swiperdata')
         const {meta} = res.data
         if (meta.status === 200) {
           const {data} = res.data
           this.imgUrls = data
         }
+      }catch(err){
+        console.log(err)
       }
-    })
-    wx.request({
-      url: 'https://itjustfun.cn/api/public/v1/home/catitems',
-      success: (res) => {
-        // console.log(res)
+
+      try{
+        let res = await request('https://itjustfun.cn/api/public/v1/home/catitems')
         const {meta} = res.data
         if (meta.status === 200) {
           const {data} = res.data
           this.menus = data
         }
+      }catch(err){
+        console.log(err)
       }
-    })
-    wx.request({
-      url: 'https://www.zhengzhicheng.cn/api/public/v1/home/floordata',
-      success: (res) => {
-        console.log(res)
+
+      try{
+        let res = await request('https://www.zhengzhicheng.cn/api/public/v1/home/floordata')
         const {meta} = res.data
         if (meta.status === 200) {
           const {message} = res.data
           this.floorData = message
         }
+      }catch(err){
+        console.log(err)
       }
-    })
+      
+    }
   },
   components: {
     "dd-search": "search"

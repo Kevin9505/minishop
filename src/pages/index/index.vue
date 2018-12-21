@@ -30,6 +30,33 @@
         <img :src="item.image_src" alt="" mode="aspectFill">
       </navigator>
     </div>
+    <!-- 产品楼层 -->
+    <div class="floor-wrapper">
+      <div class="floor-item" v-for="(floorItem, index) in floorData" :key="index">
+        <div class="floor-title">
+          <img :src="floorItem.floor_title.image_src" :alt="floorItem.floor_title.name" mode="aspectFill">
+        </div>
+        <div class="floor-content">
+          <div class="content-left">
+            <navigator 
+            class="left-item"
+            hover-class="none"
+            :open-type="floorItem.product_list[0].open_type" :url="floorItem.product_list[0].navigator_url">
+              <img :src="floorItem.product_list[0].image_src" :alt="floorItem.product_list[0].name" mode="aspectFill">
+            </navigator>
+          </div>
+          <div class="content-right">
+            <navigator 
+            hover-class="none"
+            class="right-item"
+            v-if="list!==0"
+            :open-type="contentItem.open_type" :url="contentItem.navigator_url" v-for="(contentItem, list) in floorItem.product_list" :key="list">
+              <img :src="contentItem.image_src" :alt="contentItem.name" mode="aspectFill">
+            </navigator>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,7 +66,8 @@ export default {
   data () {
     return {
       imgUrls: [],
-      menus: []
+      menus: [],
+      floorData: []
     }
   },
   mounted () {
@@ -56,11 +84,22 @@ export default {
     wx.request({
       url: 'https://itjustfun.cn/api/public/v1/home/catitems',
       success: (res) => {
-        console.log(res)
+        // console.log(res)
         const {meta} = res.data
         if (meta.status === 200) {
           const {data} = res.data
           this.menus = data
+        }
+      }
+    })
+    wx.request({
+      url: 'https://www.zhengzhicheng.cn/api/public/v1/home/floordata',
+      success: (res) => {
+        console.log(res)
+        const {meta} = res.data
+        if (meta.status === 200) {
+          const {message} = res.data
+          this.floorData = message
         }
       }
     })

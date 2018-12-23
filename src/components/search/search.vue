@@ -10,14 +10,8 @@
 .search-arapper{
   padding: 20rpx 16rpx;
   background-color: #ff2d4a;
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // z-index: 10;
   .search-input{
-    // width: 725rpx;
     height: 60rpx;
-    // width: 100%;
     font-size: 14px;
     color: #bbbbbb;
     display: flex;

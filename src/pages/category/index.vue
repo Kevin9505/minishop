@@ -21,11 +21,11 @@
             <div class="content" v-for="(sitem, sindex) in contentList.children" :key="sindex">
               <div class="title" v-if="sitem.children">/<span>{{sitem.cat_name}}</span>/</div>
               <ul>
-                <li v-for="(sonList,sonIndex) in sitem.children" :key="sonIndex">
-                  <navigator class="cate-list" hover-class="none">
+                <li @click="handleClickCatelist(sonList.cat_id)" v-for="(sonList,sonIndex) in sitem.children" :key="sonIndex">
+                  <div class="cate-list">
                     <img class="cat-icon" :src="'https://itjustfun.cn/'+sonList.cat_icon" :alt="sonList.cat_name" mode="aspectFill">
                     <span class="cat-name">{{sonList.cat_name}}</span>
-                  </navigator>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -50,6 +50,7 @@ export default {
     }
   },
   methods: {
+    // 点击按钮切换定义的商品
     handleClickMenu (index) {
       this.currentIndex = index
       try {
@@ -64,6 +65,12 @@ export default {
         // Do something when catch error
         console.log(e)
       }
+    },
+    handleClickCatelist (data) {
+      console.log(data)
+      wx.navigateTo({
+        url: `/pages/search_list/main?query=${data}`
+      })
     }
   },
   mounted () {
@@ -71,8 +78,6 @@ export default {
         const value = wx.getStorageSync('cateData')
         if (value) {
           const newValue = JSON.parse(value)
-          console.log(newValue)
-          // Do something with return value
           this.menuLIst = newValue
           this.contentList = newValue[0]
         } else {

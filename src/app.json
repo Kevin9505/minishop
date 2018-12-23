@@ -3,7 +3,8 @@
     "pages/index/main",
     "pages/category/main",
     "pages/cart/main",
-    "pages/personal/main" ],
+    "pages/personal/main",
+    "pages/search_list/main" ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#ff2d4a",

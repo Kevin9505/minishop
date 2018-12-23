@@ -119,4 +119,19 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ```
 
-#
+# 同一路由切换时,上一次的页面数据会保留
+```js
+  在页面onUnload的时候 执行:
+  Object.assign(this, this.$options.data())
+```
+
+# 超出文本显示 ...
+```css
+  .good-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+```

@@ -6,15 +6,19 @@
     </div>
     <!-- 商品区 -->
     <div class="good-wrapper">
-      <div class="good-list">
-        <div class="list-left"></div>
+      <div class="good-list" v-for="(goodsList, index) in goodsData" :key="index">
+        <div class="list-left">
+          <img :src="goodsList.goods_small_logo" alt="" mode="aspectFill">
+        </div>
         <div class="list-right">
-          <div class="good-name">紫米紫米紫米紫米紫米紫米紫米紫米紫米紫米紫米紫米紫米紫米</div>
+          <div class="good-name">{{goodsList.goods_name}}</div>
           <div class="good-price">
-            ￥<span class="price">69</span>
+            ￥<span class="price">{{goodsList.goods_price}}</span>
           </div>
         </div>
       </div>
+      <!-- 提示没有更多数据 -->
+      <div v-if="!hasMore" class="tips">我是有底线的男人...</div>
     </div>
   </div>
 </template>
@@ -27,27 +31,68 @@ export default {
       query: '',
       pagenum: 1,
       pagesize: 20,
+      // tab栏的数据
       tabList: ['综合', '销量', '价格'],
-      currentTabIndex: 0
+      // tab的切换的属性
+      currentTabIndex: 0,
+      // 商品数据
+      goodsData: [],
+      hasMore: true
     }
   },
   methods: {
+    // 切换tab栏
     handleChangeTab (index) {
       this.currentTabIndex = index
+    },
+    getGoodsList () {
+      // 已经没有更多数据时,不用再发请求了
+      if (!this.hasMore) {
+        return
+      }
+        // 显示提示框
+        wx.showLoading({
+          title: '加载中',
+          icon: 'loading'
+        })
+        // 发送请求拿数据
+        request.get('https://itjustfun.cn/api/public/v1/goods/search', {
+          query: this.query,
+          pagenum: this.pagenum,
+          pagesize: this.pagesize
+        })
+          .then(res => {
+            const {meta} = res.data
+            if (meta.status === 200) {
+              wx.hideLoading()
+              const {goods} = res.data.data
+              // 当goods列表的数量小于this.pagesize时,没有更多数据了
+              if (goods.length < this.pagesize) {
+                this.hasMore = false
+                wx.showToast({ //期间为了显示效果可以添加一个过度的弹出框提示“加载中”  
+                  title: '到底啦!!!',
+                  icon: 'success',
+                  duration: 1000
+                });
+              }
+              this.goodsData = this.goodsData.concat(goods)
+              this.pagenum++
+            }
+          })
     }
   },
-  onload (query) {
-    console.log(query)
-    this.query = query
-    request.get('https://itjustfun.cn/api/public/v1/goods/search', {
-      query: this.query,
-      pagenum: this.pagenum,
-      pagesize: this.pagesize
-    })
-      .then(res => {
-        console.log(11)
-        console.log(res)
-      })
+  onLoad (query) { // 监听页面加载(只执行一次)
+    this.query = query.keyword
+  },
+  onShow () { // 监听页面显示(页面显示时就会执行)
+    this.getGoodsList()
+  },
+  onUnload () {
+    // 解决同一路由切换时,上一次的页面数据会保留问题
+    Object.assign(this, this.$options.data())
+  },
+  onReachBottom () { // 页面滚到底部时触发
+    this.getGoodsList()
   },
   components: {
     "dd-search": search

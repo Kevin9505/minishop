@@ -21,10 +21,12 @@
       padding: 30rpx 20rpx 20rpx 0rpx;
       border-bottom: 1px solid #f4f4f4;
       .list-left{
-        height: 200rpx;
-        width: 200rpx;
-        flex-shrink: 0;
-        background-color: #f4f4f4;
+        img{
+          height: 200rpx;
+          width: 200rpx;
+          flex-shrink: 0;
+          background-color: #f4f4f4;
+        }
       }
       .list-right{
         flex: 1;
@@ -50,6 +52,12 @@
           }
         }
       }
+    }
+    .tips{
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      padding: 20rpx 0rpx;
     }
   }
 }

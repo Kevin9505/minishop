@@ -21,7 +21,7 @@
             <div class="content" v-for="(sitem, sindex) in contentList.children" :key="sindex">
               <div class="title" v-if="sitem.children">/<span>{{sitem.cat_name}}</span>/</div>
               <ul>
-                <li @click="handleClickCatelist(sonList.cat_id)" v-for="(sonList,sonIndex) in sitem.children" :key="sonIndex">
+                <li @click="handleClickCatelist(sonList.cat_name)" v-for="(sonList,sonIndex) in sitem.children" :key="sonIndex">
                   <div class="cate-list">
                     <img class="cat-icon" :src="'https://itjustfun.cn/'+sonList.cat_icon" :alt="sonList.cat_name" mode="aspectFill">
                     <span class="cat-name">{{sonList.cat_name}}</span>
@@ -67,9 +67,8 @@ export default {
       }
     },
     handleClickCatelist (data) {
-      console.log(data)
       wx.navigateTo({
-        url: `/pages/search_list/main?query=${data}`
+        url: `/pages/search_list/main?keyword=${data}`
       })
     }
   },

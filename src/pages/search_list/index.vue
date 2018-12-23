@@ -37,6 +37,7 @@ export default {
       currentTabIndex: 0,
       // 商品数据
       goodsData: [],
+      // 判断是否还有更多数据
       hasMore: true
     }
   },
@@ -50,35 +51,37 @@ export default {
       if (!this.hasMore) {
         return
       }
-        // 显示提示框
-        wx.showLoading({
-          title: '加载中',
-          icon: 'loading'
-        })
-        // 发送请求拿数据
-        request.get('https://itjustfun.cn/api/public/v1/goods/search', {
-          query: this.query,
-          pagenum: this.pagenum,
-          pagesize: this.pagesize
-        })
-          .then(res => {
-            const {meta} = res.data
-            if (meta.status === 200) {
-              wx.hideLoading()
-              const {goods} = res.data.data
-              // 当goods列表的数量小于this.pagesize时,没有更多数据了
-              if (goods.length < this.pagesize) {
-                this.hasMore = false
-                wx.showToast({ //期间为了显示效果可以添加一个过度的弹出框提示“加载中”  
-                  title: '到底啦!!!',
-                  icon: 'success',
-                  duration: 1000
-                });
-              }
-              this.goodsData = this.goodsData.concat(goods)
-              this.pagenum++
+      // 显示提示框
+      wx.showLoading({
+        title: '加载中',
+        icon: 'loading'
+      })
+      // 发送请求拿数据
+      request.get('https://itjustfun.cn/api/public/v1/goods/search', {
+        query: this.query,
+        pagenum: this.pagenum,
+        pagesize: this.pagesize
+      })
+        .then(res => {
+          const {meta} = res.data
+          if (meta.status === 200) {
+            // 隐藏提示框
+            wx.hideLoading()
+            const {goods} = res.data.data
+            // 当goods列表的数量小于this.pagesize时,没有更多数据了
+            if (goods.length < this.pagesize) {
+              this.hasMore = false
+              wx.showToast({ //期间为了显示效果可以添加一个过度的弹出框提示“加载中”  
+                title: '到底啦!!!',
+                icon: 'success',
+                duration: 1000
+              });
             }
-          })
+            // 合并数据Array.concat(array)
+            this.goodsData = this.goodsData.concat(goods)
+            this.pagenum++
+          }
+        })
     }
   },
   onLoad (query) { // 监听页面加载(只执行一次)

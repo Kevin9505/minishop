@@ -66,6 +66,7 @@ export default {
         console.log(e)
       }
     },
+    // 跳转商品页
     handleClickCatelist (data) {
       wx.navigateTo({
         url: `/pages/search_list/main?keyword=${data}`
@@ -74,43 +75,32 @@ export default {
   },
   mounted () {
     try {
-        const value = wx.getStorageSync('cateData')
-        if (value) {
-          const newValue = JSON.parse(value)
-          this.menuLIst = newValue
-          this.contentList = newValue[0]
-        } else {
-          request('https://itjustfun.cn/api/public/v1/categories')
-            .then(res => {
-              const {meta} = res.data
-              if (meta.status === 200) {
-                const {data} = res.data
-                this.menuLIst = data
-                this.contentList = data[0]
-                // 缓存本地
-                try {
-                  wx.setStorageSync('cateData', JSON.stringify(this.menuLIst))
-                } catch (e) { }
-              }
-            })
+      // 获取本地缓存
+      const value = wx.getStorageSync('cateData')
+      // 判断是否有本地缓存,有则从本地获取数据,不然发请求
+      if (value) {
+        const newValue = JSON.parse(value)
+        this.menuLIst = newValue
+        this.contentList = newValue[0]
+      } else {
+        request('https://itjustfun.cn/api/public/v1/categories')
+          .then(res => {
+            const {meta} = res.data
+            if (meta.status === 200) {
+              const {data} = res.data
+              this.menuLIst = data
+              this.contentList = data[0]
+              // 缓存本地
+              try {
+                // 设置本地缓存
+                wx.setStorageSync('cateData', JSON.stringify(this.menuLIst))
+              } catch (e) { }
+            }
+          })
         }
       } catch (e) {
         // Do something when catch error
-        // console.log(e)
       }
-    // request('https://itjustfun.cn/api/public/v1/categories')
-    //   .then(res => {
-    //     const {meta} = res.data
-    //     if (meta.status === 200) {
-    //       const {data} = res.data
-    //       this.menuLIst = data
-    //       this.contentList = data[0]
-    //       // 缓存本地
-    //       try {
-    //         wx.setStorageSync('cateData', JSON.stringify(this.menuLIst))
-    //       } catch (e) { }
-    //     }
-    //   })
   },
   components: {
     'dd-search': 'search'

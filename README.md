@@ -47,22 +47,26 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
   })
 
   // 所以利用es6新语法promise封装请求方法
-  // resolve, reject 分别表示异步操作执行成功后的回调函数和异步操作执行失败后的回调函数
   /**
    * 封装 Promise 用来请求 wx.request({})
    * @param {参数} url 请求接口的路径
    * @param {参数} methods 请求的类型
+   * @param {参数} data 请求的参数
    */
-  function request(url, methods = "GET") {
+  function request(url, methods = "GET", data = {}) {
     return new Promise((resolve, reject) => {
       wx.request({
         url: url,
         methods: methods,
+        data,
         success: (res) => {
           resolve(res)
         }
       })
     }) 
+  }
+  request.get = (url, data) => {
+    return request(url, "GET", data)
   }
   // 暴露方法接口
   export default request
@@ -119,7 +123,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ```
 
-# 同一路由切换时,上一次的页面数据会保留
+# 解决 同一路由切换时,上一次的页面数据会保留 的问题
 ```js
   在页面onUnload的时候 执行:
   Object.assign(this, this.$options.data())
@@ -135,3 +139,50 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
     -webkit-box-orient: vertical;
   }
 ```
+
+# 合并数据  Array.concat(array)
+
+# 微信小程序提示框
+```js
+  // 显示提示框
+  wx.showLoading({
+    title: '加载中',
+    icon: 'loading'
+  })
+  // 隐藏提示框
+  setTimeout(function(){
+    wx.hideLoading()
+  },1000)
+
+  wx.showToast({ //期间为了显示效果可以添加一个过度的弹出框提示“加载中”  
+    title: '到底啦!!!',
+    icon: 'success',
+    duration: 1000
+  });
+```
+
+# 上拉加载
+```js
+  // 监听用户上拉触底事件
+  onReachBottom () { 
+    // dosomething
+  },
+  // 提示没有更多数据
+  <div v-if="!hasMore" class="tips">我是有底线的男人...</div>
+
+  // 监听用户下拉刷新事件。
+  onPullDownRefresh () {
+    // dosomething
+  }
+
+  // 监听用户滑动页面事件
+  onPageScroll(Object)
+  |   属性   |   类型   |   说明   |
+  | ---- | ---- | ---- |
+  |   scrollTop   |   Number   |   页面在垂直方向已滚动的距离（单位px）   |
+
+  ` 注意：请只在需要的时候才在 page 中定义此方法，不要定义空方法。以减少不必要的事件派发对渲染层-逻辑层通信的影响。 注意：请避免在 onPageScroll 中过于频繁的执行 setData 等引起逻辑层-渲染层通信的操作。尤其是每次传输大量数据，会影响通信耗时。 `
+```
+
+
+

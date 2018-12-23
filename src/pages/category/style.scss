@@ -1,6 +1,5 @@
 .category{
   .category-wrapper{
-    overflow: hidden;
     display: flex;
     position: fixed;
     top: 100rpx;
@@ -8,10 +7,10 @@
     left: 0rpx;
     right: 0rpx;
     .left-menu{
-      background-color: #f4f4f4;
       width: 198rpx;
       flex-shrink: 0;
       ul{
+        background-color: #f4f4f4;
         li{
           padding: 20rpx 0rpx;
           box-sizing: border-box;
@@ -55,13 +54,17 @@
             background-color: #f4f4f4;
           }
           .content{
-            h3{
+            .title{
+              color: #333;
               font-size: 16px;
-              padding: 10rpx 0rpx;
+              padding: 30rpx 0rpx 10rpx;
               margin: 0rpx;
               text-align: center;
               line-height: 60rpx;
               border-bottom: 1px solid #f4f4f4;
+              span{
+                padding: 0rpx 30rpx;
+              }
             }
             ul{
               display: flex;

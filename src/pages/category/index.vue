@@ -3,7 +3,7 @@
     <dd-search></dd-search>
     <div class="category-wrapper">
       <scroll-view scroll-y class="left-menu">
-        <ul ref="menuwrapper">
+        <ul>
           <li 
           :class="{'menu-active':index === currentIndex}"
           v-for="(menuItem, index) in menuLIst" 
@@ -17,9 +17,9 @@
       <scroll-view scroll-y class="right-content">
         <div class="content-wrapper">
           <div class="content-list">
-            <div class="banner"></div>
+            <div class="banner" v-if="menuLIst.length>0"></div>
             <div class="content" v-for="(sitem, sindex) in contentList.children" :key="sindex">
-              <h3>{{sitem.cat_name}}</h3>
+              <div class="title" v-if="sitem.children">/<span>{{sitem.cat_name}}</span>/</div>
               <ul>
                 <li v-for="(sonList,sonIndex) in sitem.children" :key="sonIndex">
                   <navigator class="cate-list" hover-class="none">
@@ -37,12 +37,14 @@
 </template>
 
 <script>
+// 引用公共组件
 import search from '../../components/search/search.vue'
+// 引用封装的请求函数
+import request from '../../utils/request.js'
 export default {
   data () {
     return {
       menuLIst: [],
-      active: true,
       contentList: {},
       currentIndex: 0
     }
@@ -50,23 +52,61 @@ export default {
   methods: {
     handleClickMenu (index) {
       this.currentIndex = index
-      this.contentList = this.menuLIst[index]
-      // console.log(this.contentList)
+      try {
+        const value = wx.getStorageSync('cateData')
+        if (value) {
+          const newValue = JSON.parse(value)
+          // console.log(newValue)
+          // Do something with return value
+          this.contentList = newValue[index]
+        }
+      } catch (e) {
+        // Do something when catch error
+        console.log(e)
+      }
     }
   },
   mounted () {
-    wx.request({
-      url: 'https://itjustfun.cn/api/public/v1/categories',
-      success: (res) => {
-        // console.log(res)
-        const {meta} = res.data
-        if (meta.status === 200) {
-          const {data} = res.data
-          this.menuLIst = data
-          this.contentList = data[0]
+    try {
+        const value = wx.getStorageSync('cateData')
+        if (value) {
+          const newValue = JSON.parse(value)
+          console.log(newValue)
+          // Do something with return value
+          this.menuLIst = newValue
+          this.contentList = newValue[0]
+        } else {
+          request('https://itjustfun.cn/api/public/v1/categories')
+            .then(res => {
+              const {meta} = res.data
+              if (meta.status === 200) {
+                const {data} = res.data
+                this.menuLIst = data
+                this.contentList = data[0]
+                // 缓存本地
+                try {
+                  wx.setStorageSync('cateData', JSON.stringify(this.menuLIst))
+                } catch (e) { }
+              }
+            })
         }
+      } catch (e) {
+        // Do something when catch error
+        // console.log(e)
       }
-    })
+    // request('https://itjustfun.cn/api/public/v1/categories')
+    //   .then(res => {
+    //     const {meta} = res.data
+    //     if (meta.status === 200) {
+    //       const {data} = res.data
+    //       this.menuLIst = data
+    //       this.contentList = data[0]
+    //       // 缓存本地
+    //       try {
+    //         wx.setStorageSync('cateData', JSON.stringify(this.menuLIst))
+    //       } catch (e) { }
+    //     }
+    //   })
   },
   components: {
     'dd-search': 'search'

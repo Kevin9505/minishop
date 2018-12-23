@@ -108,3 +108,15 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
     
   }
 ```
+# 可视区域布局100%展示
+```css
+
+    position: fixed;
+    top: 100rpx;
+    bottom: 0rpx;
+    left: 0rpx;
+    right: 0rpx;
+
+```
+
+#

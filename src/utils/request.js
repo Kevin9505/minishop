@@ -9,7 +9,8 @@ function request(url, methods = "GET", data = {}) {
     // 显示提示框
     wx.showLoading({
       title: '加载中',
-      icon: 'loading'
+      icon: 'loading',
+      mask: true
     })
     wx.request({
       url: url,

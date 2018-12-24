@@ -1,11 +1,24 @@
 <template>
   <div class="search-arapper">
-    <div class="search-input">
+    <navigator hover-class="none" url="/pages/search/main" open-type="navigate" class="search-input" @click="handleToSearch">
       <icon type="search" size="14" />
       搜索
-    </div>
+    </navigator>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    handleToSearch () {
+      console.log(112233)
+      wx.navigateTo({
+        url: '/pages/search/main'
+      })
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 .search-arapper{
   padding: 20rpx 16rpx;

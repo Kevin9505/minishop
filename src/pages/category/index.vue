@@ -1,6 +1,6 @@
 <template>
   <div class="category">
-    <dd-search></dd-search>
+    <dd-search />
     <div class="category-wrapper">
       <scroll-view scroll-y class="left-menu">
         <ul>

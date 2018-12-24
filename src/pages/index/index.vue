@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <!-- 搜索框 -->
-    <dd-search></dd-search>
+    <dd-search />
     <!-- 轮播图 -->
     <swiper
       indicator-dots=true

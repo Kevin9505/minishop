@@ -54,6 +54,7 @@
     <!-- 购物车 -->
     <div class="shopcart">
       <div class="shopcart-left">
+        <button open-type="contact" class="change-searver">联系客服</button>
         <div class="server">
           <span class="iconfont icon-kefu"></span>
           <span class="server-text">联系客服</span>
@@ -96,7 +97,7 @@ export default {
   methods: {
     // 获取商品详情数据
     getDetailData () {
-      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: 57396})
+      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: this.goods_id})
         .then(res => {
           const {meta} = res.data
           if (meta.status === 200) {

@@ -99,6 +99,15 @@
     .shopcart-left{
       width: 326rpx;
       display: flex;
+      position: relative;
+      .change-searver{
+        height: 98rpx;
+        width: 163rpx;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        opacity: 0;
+      }
       .server, .cart{
         color: #bbbbbb;
         flex: 1;

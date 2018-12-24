@@ -8,7 +8,7 @@
     <div class="good-wrapper">
       <div class="good-list" v-for="(goodsList, index) in goodsData" :key="index">
         <div class="list-left">
-          <img :src="goodsList.goods_small_logo" alt="" mode="aspectFill">
+          <img lazy-load :src="goodsList.goods_small_logo" alt="" mode="aspectFill">
         </div>
         <div class="list-right">
           <div class="good-name">{{goodsList.goods_name}}</div>

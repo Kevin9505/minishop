@@ -112,6 +112,11 @@ export default {
     // await可以让JavaScript进行等待，直到一个promise执行并返回它的结果，JavaScript才会继续往下执行。
     // try{}catch(err){} 捕获代码块错误信息
     async getData () {
+      // 显示提示框
+      wx.showLoading({
+        title: '加载中',
+        icon: 'loading'
+      })
       try{
         let res = await request('https://itjustfun.cn/api/public/v1/home/swiperdata')
         const {meta} = res.data
@@ -144,7 +149,8 @@ export default {
       }catch(err){
         console.log(err)
       }
-      
+      // 隐藏提示框
+      wx.hideLoading()
     }
   },
   components: {

@@ -1,0 +1,68 @@
+.search-wrapper{
+  .input-wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 30rpx 16rpx;
+    background-color: #f4f4f4;
+    .search-box{
+      display: flex;
+      flex: 1;
+      align-items: center;
+      position: relative;
+      .icon{
+        position: absolute;
+        left: 20rpx;
+      }
+      .input{
+        height: 60rpx;
+        flex: 1;
+        display: block;
+        font-size: 14px;
+        padding-left: 70rpx;
+        background-color: #fff;
+        border-radius: 4px;
+      }
+    }
+    .cancel-btn{
+      width: 158rpx;
+      height: 58rpx;
+      line-height: 58rpx;
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+      margin-left: 20rpx;
+      border-radius: 4px;
+      border: 1px solid #e2e2e2;
+    }
+  }
+  .history-wrapper{
+    .title{
+      height: 80rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16rpx;
+      color: #333;
+      font-size: 14px;
+      box-shadow: 0px 0px 0px 1px #f4f4f4;
+      .history-title{}
+      .icon{
+        margin-right: 20rpx;
+      }
+    }
+    .content-wrapper{
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20rpx 16rpx;
+      .history-list{
+        color: #333;
+        font-size: 14px;
+        padding: 10rpx 25rpx;
+        margin-right: 30rpx;
+        margin-bottom: 18rpx;
+        border-radius: 4px;
+        background-color: #bbb;
+      }
+    }
+  }
+}

@@ -35,7 +35,7 @@
             {{detailData.goods_name}}
           </span>
           <span class="collect">
-            <icon type="success" size="16" />
+            <span class="minishop icon-shoucang"></span>
             收藏
           </span>
         </div>
@@ -49,17 +49,17 @@
           {{tab}}
         </div>
       </div>
-      <div v-html="detailData.goods_introduce"></div>
+      <div class="introduce" v-html="detailData.goods_introduce"></div>
     </scroll-view>
     <!-- 购物车 -->
     <div class="shopcart">
       <div class="shopcart-left">
         <div class="server">
-          <icon type="success" size="16" />
+          <span class="minishop icon-kefu"></span>
           <span>联系客服</span>
         </div>
         <div class="cart">
-          <icon type="success" size="16" />
+          <span class="minishop icon-gouwuche">1</span>
           <span>购物车</span>
         </div>
       </div>
@@ -90,6 +90,9 @@ export default {
   onShow () {
     this.getDetailData()
   },
+  onUnLoad () {
+    Object.assign(this,this.$options.data())
+  },
   methods: {
     // 获取商品详情数据
     getDetailData () {
@@ -111,7 +114,6 @@ export default {
         })
     },
     handleChangeTab (index) {
-      console.log(index)
       this.currentIndex = index
     }
   },

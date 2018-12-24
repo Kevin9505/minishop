@@ -34,7 +34,7 @@
 				{
 					"id": 0,
 					"name": "dev",
-					"pathName": "pages/detail/main",
+					"pathName": "pages/search/main",
 					"query": ""
 				}
 			]

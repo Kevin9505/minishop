@@ -1,6 +1,6 @@
 <template>
   <div class="detail" v-if="hasData">
-    <div class="detail-wrapper">
+    <scroll-view scroll-y class="detail-wrapper">
       <div class="swiper">
         <!-- 轮播图 -->
         <swiper
@@ -41,8 +41,16 @@
         </div>
         <div class="delivery">快递: <span>免运费</span></div>
       </div>
+      <!-- 分割线 -->
       <dd-splitter />
-    </div>
+      <!-- tab栏 -->
+      <div class="tab-wrapper">
+        <div class="tab-list" @click="handleChangeTab(index)" :class="{'active-tab':currentIndex === index}" v-for="(tab, index) in tabList" :key="index">
+          {{tab}}
+        </div>
+      </div>
+      <div v-html="detailData.goods_introduce"></div>
+    </scroll-view>
     <!-- 购物车 -->
     <div class="shopcart">
       <div class="shopcart-left">
@@ -69,17 +77,28 @@ export default {
   data () {
     return　{
       detailData: {},
-      hasData: false
+      hasData: false,
+      tabList: ['商品介绍', '规格参数', '售后保障'],
+      currentIndex: 0,
+      goods_id: ''
     }
   },
+  onLoad (query) {
+    // 获取传过来的数据
+    this.goods_id = query.goodsId
+  },
+  onShow () {
+    this.getDetailData()
+  },
   methods: {
+    // 获取商品详情数据
     getDetailData () {
       // 显示提示框
       wx.showLoading({
         title: '加载中',
         icon: 'loading'
       })
-      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: 5})
+      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: this.goods_id})
         .then(res => {
           // console.log(res)
           const {meta} = res.data
@@ -88,13 +107,16 @@ export default {
             const {data} = res.data
             this.detailData = data
             this.hasData = true
-            console.log(this.detailData)
           }
         })
+    },
+    handleChangeTab (index) {
+      console.log(index)
+      this.currentIndex = index
     }
   },
   mounted () {
-    this.getDetailData()
+
   },
   components: {
     'dd-splitter': splitter

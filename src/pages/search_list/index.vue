@@ -6,7 +6,7 @@
     </div>
     <!-- 商品区 -->
     <div class="good-wrapper">
-      <div class="good-list" v-for="(goodsList, index) in goodsData" :key="index">
+      <navigator :url="'/pages/detail/main?goodsId=' + goodsList.goods_id" class="good-list" v-for="(goodsList, index) in goodsData" :key="index">
         <div class="list-left">
           <img lazy-load :src="goodsList.goods_small_logo" alt="" mode="aspectFill">
         </div>
@@ -16,7 +16,7 @@
             ￥<span class="price">{{goodsList.goods_price}}</span>
           </div>
         </div>
-      </div>
+      </navigator>
       <!-- 提示没有更多数据 -->
       <div v-if="!hasMore" class="tips">我是有底线的男人...</div>
     </div>

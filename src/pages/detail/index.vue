@@ -35,7 +35,7 @@
             {{detailData.goods_name}}
           </span>
           <span class="collect">
-            <span class="minishop icon-shoucang"></span>
+            <span class="iconfont icon-shoucang"></span>
             收藏
           </span>
         </div>
@@ -55,12 +55,12 @@
     <div class="shopcart">
       <div class="shopcart-left">
         <div class="server">
-          <span class="minishop icon-kefu"></span>
-          <span>联系客服</span>
+          <span class="iconfont icon-kefu"></span>
+          <span class="server-text">联系客服</span>
         </div>
         <div class="cart">
-          <span class="minishop icon-gouwuche">1</span>
-          <span>购物车</span>
+          <span class="iconfont icon-gouwuche"></span>
+          <div class="cart-text">购物车</div>
         </div>
       </div>
       <div class="shopcart-right">
@@ -96,7 +96,7 @@ export default {
   methods: {
     // 获取商品详情数据
     getDetailData () {
-      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: this.goods_id})
+      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: 57396})
         .then(res => {
           const {meta} = res.data
           if (meta.status === 200) {

@@ -35,7 +35,7 @@
 					"id": 0,
 					"name": "dev",
 					"pathName": "pages/index/main",
-					"query": ""
+					"query": "goods_id=57396"
 				}
 			]
 		}

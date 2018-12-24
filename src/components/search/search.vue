@@ -1,6 +1,6 @@
 <template>
   <div class="search-arapper">
-    <navigator hover-class="none" url="/pages/search/main" open-type="navigate" class="search-input" @click="handleToSearch">
+    <navigator hover-class="none" url="/pages/search/main" open-type="navigate" class="search-input">
       <icon type="search" size="14" />
       搜索
     </navigator>
@@ -9,12 +9,11 @@
 <script>
 export default {
   methods: {
-    handleToSearch () {
-      console.log(112233)
-      wx.navigateTo({
-        url: '/pages/search/main'
-      })
-    }
+    // handleToSearch () {
+    //   wx.navigateTo({
+    //     url: '/pages/search/main'
+    //   })
+    // }
   }
 }
 </script>

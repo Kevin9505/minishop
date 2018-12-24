@@ -1,6 +1,12 @@
 <template>
   <div class="search-list">
-    <dd-search />
+    <!-- <dd-search /> -->
+    <div class="search-arapper">
+      <div class="search-input" @click="handleChangeToSearch">
+        <icon type="search" size="14" />
+        {{query}}
+      </div>
+    </div>
     <div class="tool-tab">
       <div class="tab-list" @click="handleChangeTab(tabIndex)" :class="{'tab-active':currentTabIndex===tabIndex}" v-for="(tabItem, tabIndex) in tabList" :key="tabIndex">{{tabItem}}</div>
     </div>
@@ -46,6 +52,7 @@ export default {
     handleChangeTab (index) {
       this.currentTabIndex = index
     },
+    // 获取商品列表数据
     getGoodsList () {
       // 已经没有更多数据时,不用再发请求了
       if (!this.hasMore) {
@@ -75,10 +82,19 @@ export default {
             this.pagenum++
           }
         })
+    },
+    // 点击搜索框跳转搜索页
+    handleChangeToSearch () {
+      wx.navigateTo({
+        url: '/pages/search/main'
+      })
+      Object.assign(this,this.$options.data())
+      console.log(11)
     }
   },
   onLoad (query) { // 监听页面加载(只执行一次)
-    this.query = query.keyword
+    console.log(query)
+    this.query = query.keyword || ''
   },
   onShow () { // 监听页面显示(页面显示时就会执行)
     this.getGoodsList()

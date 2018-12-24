@@ -25,8 +25,8 @@
     }
     .cancel-btn{
       width: 158rpx;
-      height: 58rpx;
-      line-height: 58rpx;
+      height: 56rpx;
+      line-height: 56rpx;
       text-align: center;
       font-size: 14px;
       color: #333;
@@ -55,14 +55,20 @@
       flex-wrap: wrap;
       padding: 20rpx 16rpx;
       .history-list{
-        color: #333;
+        color: #414141;
         font-size: 14px;
         padding: 10rpx 25rpx;
         margin-right: 30rpx;
         margin-bottom: 18rpx;
         border-radius: 4px;
-        background-color: #bbb;
+        background-color: #f4f4f4;
+        box-shadow: 0px 0px 1px 0px rgba(53, 53, 53, 0.2);
       }
+    }
+    .tips{
+      color: #bbb;
+      font-size: 14px;
+      padding-left: 30rpx;
     }
   }
 }

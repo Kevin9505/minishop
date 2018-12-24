@@ -75,7 +75,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
   // async await
   // async 放置在一个函数前面,意味着这个函数总是返回一个promise,如果代码中有return <非promise>语句，JavaScript会自动把返回的这个value值包装成promise的resolved值。
   // await可以让JavaScript进行等待，直到一个promise执行并返回它的结果，JavaScript才会继续往下执行。
-  // try{}catch(err){} 捕获代码块错误信息
+  // try{}catch(err){} 捕获代码块错误信息,发生错误时，不会影响后面代码的执行；还产生块级作用域
   async getData () {
     try{
       let res = await request('https://itjustfun.cn/api/public/v1/home/swiperdata')

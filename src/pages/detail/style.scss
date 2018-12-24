@@ -1,0 +1,112 @@
+.detail{
+  .detail-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 98rpx;
+    .swiper{
+      // height: 720rpx;
+      background-color: #fff;
+      .swiper-item{
+        .slide-image{
+          display: flex;
+          align-items: center;
+          // height: 720rpx;
+        }
+      }
+    }
+    .information{
+      padding: 0rpx 16rpx;
+      .price{
+        color: #ff2d4a;
+        line-height: 120rpx;
+        font-size: 16px;
+        span{
+          font-size: 20px;
+          font-weight: 600;
+          padding-left: 5px;
+        }
+      }
+      .describe{
+        height: 80rpx;
+        display: flex;
+        .goog-name{
+          flex: 1;
+          font-size: 16px;
+          color: #333;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+        .collect{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          width: 125rpx;
+          font-size: 14px;
+          color: #bbbbbb;
+          flex-shrink: 0;
+        }
+      }
+      .delivery{
+        line-height: 100rpx;
+        font-size: 14px;
+        color: #bbbbbb;
+        span{
+          padding-left: 20rpx;
+        }
+      }
+    }
+  }
+  .shopcart{
+    height: 98rpx;
+    width: 750rpx;
+    display: flex;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    box-shadow: 0px 0px 0px 1px rgba(192, 192, 192, 0.3);
+    .shopcart-left{
+      width: 326rpx;
+      display: flex;
+      .server,.cart{
+        color: #bbbbbb;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10rpx 0;
+        span{
+          font-size: 14px;
+        }
+      }
+      .cart{
+        flex: 1;
+      }
+    }
+    .shopcart-right{
+      flex: 1;
+      flex-shrink: 0;
+      display: flex;
+      line-height: 98rpx;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      .add-cart{
+        flex: 1;
+        background-color: #f4b73f;
+      }
+      .buy{
+        flex: 1;
+        box-sizing: border-box;
+        border: 1px solid #bc3640;
+        background-color: #eb4450;
+      }
+    }
+  }
+}

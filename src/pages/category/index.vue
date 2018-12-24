@@ -75,17 +75,10 @@ export default {
   },
   mounted () {
     try {
-      // 显示提示框
-      wx.showLoading({
-        title: '加载中',
-        icon: 'loading'
-      })
       // 获取本地缓存
       const value = wx.getStorageSync('cateData')
       // 判断是否有本地缓存,有则从本地获取数据,不然发请求
       if (value) {
-        // 隐藏提示框
-        wx.hideLoading()
         const newValue = JSON.parse(value)
         this.menuLIst = newValue
         this.contentList = newValue[0]
@@ -94,8 +87,6 @@ export default {
           .then(res => {
             const {meta} = res.data
             if (meta.status === 200) {
-              // 隐藏提示框
-              wx.hideLoading()
               const {data} = res.data
               this.menuLIst = data
               this.contentList = data[0]

@@ -6,11 +6,18 @@
  */
 function request(url, methods = "GET", data = {}) {
   return new Promise((resolve, reject) => {
+    // 显示提示框
+    wx.showLoading({
+      title: '加载中',
+      icon: 'loading'
+    })
     wx.request({
       url: url,
       methods: methods,
       data,
       success: (res) => {
+        // 隐藏提示框
+        wx.hideLoading()
         resolve(res)
       }
     })

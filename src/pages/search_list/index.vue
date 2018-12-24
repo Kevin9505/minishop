@@ -51,11 +51,6 @@ export default {
       if (!this.hasMore) {
         return
       }
-      // 显示提示框
-      wx.showLoading({
-        title: '加载中',
-        icon: 'loading'
-      })
       // 发送请求拿数据
       request.get('https://itjustfun.cn/api/public/v1/goods/search', {
         query: this.query,
@@ -65,8 +60,6 @@ export default {
         .then(res => {
           const {meta} = res.data
           if (meta.status === 200) {
-            // 隐藏提示框
-            wx.hideLoading()
             const {goods} = res.data.data
             // 当goods列表的数量小于this.pagesize时,没有更多数据了
             if (goods.length < this.pagesize) {

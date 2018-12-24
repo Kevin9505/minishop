@@ -96,17 +96,10 @@ export default {
   methods: {
     // 获取商品详情数据
     getDetailData () {
-      // 显示提示框
-      wx.showLoading({
-        title: '加载中',
-        icon: 'loading'
-      })
       request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: this.goods_id})
         .then(res => {
-          // console.log(res)
           const {meta} = res.data
           if (meta.status === 200) {
-            wx.hideLoading()
             const {data} = res.data
             this.detailData = data
             this.hasData = true

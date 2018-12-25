@@ -1,6 +1,7 @@
 <template>
   <div class="detail" v-if="hasData">
     <scroll-view scroll-y class="detail-wrapper">
+      <!-- 轮播图 -->
       <div class="swiper">
         <!-- 轮播图 -->
         <swiper
@@ -28,6 +29,7 @@
           </block>
         </swiper>
       </div>
+      <!-- 商品信息 -->
       <div class="information">
         <div class="price">￥<span>{{detailData.goods_price}}</span></div>
         <div class="describe">

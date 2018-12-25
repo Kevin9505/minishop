@@ -61,7 +61,7 @@ export default {
     },
     handleClickHistoryList (list) {
       wx.navigateTo({
-        url: `/pages/goods_list/main?keyword=${list}`
+        url: `/pages/goods_list/main?query=${list}`
       })
     }
   }

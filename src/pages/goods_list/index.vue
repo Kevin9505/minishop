@@ -94,7 +94,7 @@ export default {
   },
   onLoad (query) { // 监听页面加载(只执行一次)
     console.log(query)
-    this.query = query.keyword || ''
+    this.query = query.query || ''
   },
   onShow () { // 监听页面显示(页面显示时就会执行)
     this.getGoodsList()

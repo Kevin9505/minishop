@@ -4,7 +4,7 @@
     "pages/category/main",
     "pages/cart/main",
     "pages/personal/main",
-    "pages/search_list/main",
+    "pages/goods_list/main",
     "pages/detail/main",
     "pages/search/main"],
   "window": {

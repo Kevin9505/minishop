@@ -50,7 +50,7 @@ export default {
       wx.setStorageSync('historyData', this.historyData)
       // 跳转页面
       wx.navigateTo({
-        url: `/pages/search_list/main?keyword=${this.searchValue}`
+        url: `/pages/goods_list/main?query=${this.searchValue}`
       })
       // 清空输入框
       this.searchValue = ''
@@ -61,7 +61,7 @@ export default {
     },
     handleClickHistoryList (list) {
       wx.navigateTo({
-        url: `/pages/search_list/main?keyword=${list}`
+        url: `/pages/goods_list/main?keyword=${list}`
       })
     }
   }

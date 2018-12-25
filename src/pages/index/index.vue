@@ -41,7 +41,7 @@
             <navigator 
             class="left-item"
             hover-class="none"
-            :open-type="floorItem.product_list[0].open_type" :url="floorItem.product_list[0].navigator_url">
+            :open-type="floorItem.product_list[0].open_type" :url="'/'+floorItem.product_list[0].navigator_url+'/main'">
               <img :src="floorItem.product_list[0].image_src" :alt="floorItem.product_list[0].name" mode="aspectFill">
             </navigator>
           </div>

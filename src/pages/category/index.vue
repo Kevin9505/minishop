@@ -69,7 +69,7 @@ export default {
     // 跳转商品页
     handleClickCatelist (data) {
       wx.navigateTo({
-        url: `/pages/search_list/main?keyword=${data}`
+        url: `/pages/goods_list/main?query=${data}`
       })
     }
   },

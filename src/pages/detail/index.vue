@@ -89,10 +89,12 @@ export default {
     }
   },
   onLoad (query) {
+    console.log(query)
     // 获取传过来的数据
     this.goods_id = query.goodsId
   },
   onShow () {
+    // Object.assign(this, this.$options.data())
     this.getDetailData()
   },
   onUnLoad () {

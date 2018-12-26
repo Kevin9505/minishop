@@ -37,9 +37,9 @@
           <div class="cart-list" v-for="(list, key) in cartData" :key="key">
             <div class="select-icon iconfont icon-xuanze" @click="handleSelectGood(list)" :class="list.isSelected?'hasSelected':''"></div>
             <div class="good-wrapper">
-              <div class="good-img">
+              <navigator :url="'/pages/detail/main?goodsId='+list.goods_id" class="good-img">
                 <img :src="list.goods_small_logo" mode="aspectFill" alt="">
-              </div>
+              </navigator>
               <div class="good-info">
                 <div class="good-name">{{list.goods_name}}</div>
                 <div class="tool-wrapper">
@@ -90,7 +90,6 @@ export default {
   data () {
     return {
       count: 0,
-      hasChecked: false,
       // 收货地址信息
       addressData: wx.getStorageSync('address') || {},
       cartData: {}
@@ -216,13 +215,14 @@ export default {
     },
     // 判断是否全选
     hasSelectedAll () {
+      let hasChecked = true
       Object.keys(this.cartData).forEach(value => {
         if (!this.cartData[value].isSelected) {
-          this.hasChecked = true
-          return this.hasChecked
+          hasChecked = false
+          return hasChecked
         }
       })
-      return this.hasChecked = !this.hasChecked
+      return hasChecked
     },
     // 是否显示删除按钮
     hasShowDelete () {

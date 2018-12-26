@@ -2,19 +2,22 @@
   <div class="cart">
     <!-- 地址 -->
     <div class="address-wrapper">
-      <div class="consignee-user" @click="getUserAddress">
-        <span class="user">收货人: </span>
-        <div class="info-wrapper">
-          <span class="name">{{addressData.userName}}</span>
-          <span class="phone">
-          {{addressData.telNumber}}
-          <span class="more iconfont icon-you"></span>
-          </span>
+      <div class="addr" v-if="JSON.stringify(addressData)">
+        <div class="consignee-user" @click="getUserAddress">
+          <span class="user">收货人: </span>
+          <div class="info-wrapper">
+            <span class="name">{{addressData.userName}}</span>
+            <span class="phone">
+            {{addressData.telNumber}}
+            <span class="more iconfont icon-you"></span>
+            </span>
+          </div>
+        </div>
+        <div class="consignee-address">
+          收货地址: <span class="address">{{addressData.provinceName}}{{addressData.cityName}}{{addressData.countyName}}{{addressData.detailInfo}}</span>
         </div>
       </div>
-      <div class="consignee-address">
-        收货地址: <span class="address">{{addressData.provinceName}}{{addressData.cityName}}{{addressData.countyName}}{{addressData.detailInfo}}</span>
-      </div>
+      <button plain type="default" v-if="!JSON.stringify(addressData)" @click="getUserAddress" class="get-address">点击获取地址</button>
     </div>
     <!-- 分割线 -->
     <div class="line"></div>
@@ -128,10 +131,10 @@ export default {
   methods: {
     getUserAddress () {
       wx.chooseAddress({
-      success(res) {
+      success: (res) => {
         // console.log(res)
         this.addressData = res
-        console.log(this.addressData,11)
+        // console.log(this.addressData,11)
         wx.setStorageSync('address', this.addressData)
         // try {
         //   wx.setStorageSync('addressData', this.addressData)

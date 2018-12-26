@@ -2,18 +2,18 @@
   <div class="cart">
     <!-- 地址 -->
     <div class="address-wrapper">
-      <div class="consignee-user">
+      <div class="consignee-user" @click="getUserAddress">
         <span class="user">收货人: </span>
         <div class="info-wrapper">
-          <span class="name">苏</span>
+          <span class="name">{{addressData.userName}}</span>
           <span class="phone">
-          13535239647
+          {{addressData.telNumber}}
           <span class="more iconfont icon-you"></span>
           </span>
         </div>
       </div>
       <div class="consignee-address">
-        收货地址: <span class="address">广东省广州市天河区珠吉路</span>
+        收货地址: <span class="address">{{addressData.provinceName}}{{addressData.cityName}}{{addressData.countyName}}{{addressData.detailInfo}}</span>
       </div>
     </div>
     <!-- 分割线 -->
@@ -78,7 +78,9 @@ export default {
   data () {
     return {
       count: 0,
-      hasChecked: false
+      hasChecked: false,
+      // 收货地址信息
+      addressData: wx.getStorageSync('address') || {}
     }
   },
   onLoad () {
@@ -122,6 +124,29 @@ export default {
         // }
       }
     })
+  },
+  methods: {
+    getUserAddress () {
+      wx.chooseAddress({
+      success(res) {
+        // console.log(res)
+        this.addressData = res
+        console.log(this.addressData,11)
+        wx.setStorageSync('address', this.addressData)
+        // try {
+        //   wx.setStorageSync('addressData', this.addressData)
+        // } catch (e) { }
+        // console.log(res.userName)
+        // console.log(res.postalCode)
+        // console.log(res.provinceName)
+        // console.log(res.cityName)
+        // console.log(res.countyName)
+        // console.log(res.detailInfo)
+        // console.log(res.nationalCode)
+        // console.log(res.telNumber)
+      }
+    })
+    }
   },
   components: {
     'dd-splitter': splitter

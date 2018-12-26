@@ -1,10 +1,9 @@
 .personal-wrapper{
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #f4f4f4;
+  // position: relative;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
   .userinfo-wrapper{
     height: 400rpx;
     display: flex;
@@ -40,18 +39,26 @@
     }
   }
   .content{
-    position: absolute;
+    position: fixed;
     top: 370rpx;
     left: 0rpx;
-    width: 750rpx;
-    height: 100%;
+    right: 0rpx;
+    bottom: 0rpx;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: #f4f4f4;
     padding: 0px 16rpx;
+    padding-top: 100rpx;
     .tool-wrapper{
+      width: 718rpx;
       display: flex;
       color: #bbbbbb;
       font-size: 14px;
+      position: absolute;
+      top: -20rpx;
+      left: 16rpx;
+      z-index: 10;
+      background-color: #fff;
+      margin-bottom: 20rpx;
       .tool-list{
         height: 120rpx;
         flex: 1;
@@ -59,8 +66,54 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        .count{}
-        .list-name{}
+        // .count{}
+        // .list-name{}
+      }
+    }
+    /* 订单管理 */
+    .order-wrapper{
+      margin-top: 20rpx;
+      margin-bottom: 20rpx;
+      padding: 0rpx 30rpx;
+      background-color: #fff;
+      .order-title{
+        font-size: 14px;
+        height: 88rpx;
+        color: #333333;
+        line-height: 88rpx;
+        border-bottom: 1px solid #f4f4f4;
+      }
+      .order-content{
+        display: flex;
+        .order-list{
+          font-size: 14px;
+          flex: 1;
+          text-align: center;
+          padding: 34rpx 0rpx 24rpx 0rpx;
+          .icon{
+            font-size: 26px;
+            color: #ff2d4a;
+          }
+          .order-text{
+            color: #333333;
+            padding-top: 10rpx;
+          }
+        }
+      }
+    }
+    /* 收货地址管理 */
+    .address{
+      height: 88rpx;
+      font-size: 14px;
+      color: #333333;
+      padding: 0rpx 30rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      .address-icon{
+        font-size: 12px;
+        color: #bbb;
       }
     }
   }

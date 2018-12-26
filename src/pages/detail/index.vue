@@ -65,6 +65,7 @@
           <span class="iconfont icon-gouwuche"></span>
           <div class="cart-text">购物车</div>
         </navigator>
+        <div class="tips" v-show="totalCount">{{totalCount}}</div>
       </div>
       <div class="shopcart-right">
         <div class="add-cart" @click="handleAddToCart(detailData.goods_id)">加入购物车</div>
@@ -84,7 +85,7 @@ export default {
       tabList: ['商品介绍', '规格参数', '售后保障'],
       currentIndex: 0,
       goods_id: '',
-      cartData: {}
+      totalCount: ''
     }
   },
   onLoad (query) {
@@ -114,8 +115,8 @@ export default {
     handleChangeTab (index) {
       this.currentIndex = index
     },
+    // 添加到购物车
     handleAddToCart (id) {
-      console.log(id)
       // 判断本地缓存是否存在
       const buyGoods = wx.getStorageSync('cartData') || {}
       // 判断是否存在该商品
@@ -126,6 +127,8 @@ export default {
       } else { // 存在时,数量增加
         buyGoods[id].buyCount++
       }
+      this.totalCount = buyGoods[id].buyCount
+      console.log(this.totalCount)
       // 存入本地
       wx.setStorageSync('cartData', buyGoods)
       // 提示框
@@ -136,8 +139,10 @@ export default {
       })
     }
   },
-  mounted () {
-
+  computed: {
+    // totalCount () {
+    //   return this.
+    // }
   },
   components: {
     'dd-splitter': splitter

@@ -2,7 +2,7 @@
   <div class="cart">
     <!-- 地址 -->
     <div class="address-wrapper">
-      <div class="addr" v-if="JSON.stringify(addressData)">
+      <div class="addr" v-if="hasAddress">
         <div class="consignee-user" @click="getUserAddress">
           <span class="user">收货人: </span>
           <div class="info-wrapper">
@@ -17,7 +17,7 @@
           收货地址: <span class="address">{{addressData.provinceName}}{{addressData.cityName}}{{addressData.countyName}}{{addressData.detailInfo}}</span>
         </div>
       </div>
-      <button plain type="default" v-if="!JSON.stringify(addressData)" @click="getUserAddress" class="get-address">点击获取地址</button>
+      <button plain type="default" @click="getUserAddress" v-if="!hasAddress" class="get-address">点击获取地址</button>
     </div>
     <!-- 分割线 -->
     <div class="line"></div>
@@ -87,68 +87,78 @@ export default {
     }
   },
   onLoad () {
-    wx.login({
-      success (res) {
-      console.log(11)
-      console.log(res)
-      if (res.code) {
-        //发起网络请求
-        wx.request({
-          url: 'https://itjustfun.cn/api/public/v1/users/wxlogin',
-          data: {
-            code: res.code
-          }
-        })
-      } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
-    })
-    wx.getUserInfo({
-      success: function(res) {
-        console.log(res)
-        var userInfo = res.userInfo
-        var nickName = userInfo.nickName
-        var avatarUrl = userInfo.avatarUrl
-        var gender = userInfo.gender //性别 0：未知、1：男、2：女
-        var province = userInfo.province
-        var city = userInfo.city
-        var country = userInfo.country
-      }
-    })
-    wx.getSetting({
-      success(res) {
-        console.log(1221)
-        console.log(res)
-        console.log(res.authSetting)
-        // res.authSetting = {
-        //   "scope.userInfo": true,
-        //   "scope.userLocation": true
-        // }
-      }
-    })
+    // wx.login({
+    //   success (res) {
+    //   console.log(11)
+    //   console.log(res)
+    //   if (res.code) {
+    //     //发起网络请求
+    //     wx.request({
+    //       url: 'https://itjustfun.cn/api/public/v1/users/wxlogin',
+    //       data: {
+    //         code: res.code
+    //       }
+    //     })
+    //   } else {
+    //       console.log('登录失败！' + res.errMsg)
+    //     }
+    //   }
+    // })
+    // wx.getUserInfo({
+    //   success: function(res) {
+    //     console.log(res)
+    //     var userInfo = res.userInfo
+    //     var nickName = userInfo.nickName
+    //     var avatarUrl = userInfo.avatarUrl
+    //     var gender = userInfo.gender //性别 0：未知、1：男、2：女
+    //     var province = userInfo.province
+    //     var city = userInfo.city
+    //     var country = userInfo.country
+    //   }
+    // })
+    // wx.getSetting({
+    //   success(res) {
+    //     console.log(1221)
+    //     console.log(res)
+    //     console.log(res.authSetting)
+    //     // res.authSetting = {
+    //     //   "scope.userInfo": true,
+    //     //   "scope.userLocation": true
+    //     // }
+    //   }
+    // })
   },
   methods: {
     getUserAddress () {
+      console.log(1)
       wx.chooseAddress({
-      success: (res) => {
-        // console.log(res)
-        this.addressData = res
-        // console.log(this.addressData,11)
-        wx.setStorageSync('address', this.addressData)
-        // try {
-        //   wx.setStorageSync('addressData', this.addressData)
-        // } catch (e) { }
-        // console.log(res.userName)
-        // console.log(res.postalCode)
-        // console.log(res.provinceName)
-        // console.log(res.cityName)
-        // console.log(res.countyName)
-        // console.log(res.detailInfo)
-        // console.log(res.nationalCode)
-        // console.log(res.telNumber)
+        success: (res) => {
+          // console.log(res)
+          this.addressData = res
+          // console.log(this.addressData,11)
+          wx.setStorageSync('address', this.addressData)
+          // try {
+          //   wx.setStorageSync('addressData', this.addressData)
+          // } catch (e) { }
+          // console.log(res.userName)
+          // console.log(res.postalCode)
+          // console.log(res.provinceName)
+          // console.log(res.cityName)
+          // console.log(res.countyName)
+          // console.log(res.detailInfo)
+          // console.log(res.nationalCode)
+          // console.log(res.telNumber)
+        }
+      })
+    }
+  },
+  computed: {
+    hasAddress () {
+      if (JSON.stringify(this.addressData) === '{}') {
+        return false
+      } if (JSON.stringify(this.addressData) !== '{}') {
+        return true
       }
-    })
     }
   },
   components: {

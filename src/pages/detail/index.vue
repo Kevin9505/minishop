@@ -100,7 +100,7 @@ export default {
   methods: {
     // 获取商品详情数据
     getDetailData () {
-      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: 57394})
+      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: 57393})
         .then(res => {
           const {meta} = res.data
           if (meta.status === 200) {
@@ -115,13 +115,25 @@ export default {
       this.currentIndex = index
     },
     handleAddToCart (id) {
+      console.log(id)
+      // 判断本地缓存是否存在
+      const buyGoods = wx.getStorageSync('cartData') || {}
+      // 判断是否存在该商品
+      if (!buyGoods[id]) { // 不存在
+        buyGoods[id] = this.detailData
+        buyGoods[id].isSelected = true
+        buyGoods[id].buyCount = 1
+      } else { // 存在时,数量增加
+        buyGoods[id].buyCount++
+      }
+      // 存入本地
+      wx.setStorageSync('cartData', buyGoods)
+      // 提示框
       wx.showToast({
-        title: '添加成功',
+        title: '成功加入购物车',
         icon: 'success',
         duration: 2000
       })
-      this.cartData[id] = this.detailData
-      wx.setStorageSync('cartData', this.cartData)
     }
   },
   mounted () {

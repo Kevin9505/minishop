@@ -29,21 +29,21 @@
         优购生活馆
       </div>
       <div class="cart-content">
-        <div class="cart-list">
-          <div class="select-icon iconfont icon-xuanze"></div>
+        <div class="cart-list" v-for="(list, key) in cartData" :key="key">
+          <div class="select-icon iconfont icon-xuanze" :class="list.isSelected?'hasSelected':''"></div>
           <div class="good-wrapper">
             <div class="good-img">
-              <!-- <img src="" height="160" width="160" mode="aspectFill" alt=""> -->
+              <img :src="list.goods_small_logo" mode="aspectFill" alt="">
             </div>
             <div class="good-info">
-              <div class="good-name">初遇2017初遇2017初遇2017初遇2017初遇2017初遇2017初遇2017初遇2017初遇2017初遇2017</div>
+              <div class="good-name">{{list.goods_name}}</div>
               <div class="tool-wrapper">
                 <div class="price-wrapper">
-                  ￥ <span class="price">279.00</span>
+                  ￥ <span class="price">{{list.goods_price}}</span>
                 </div>
                 <div class="tool">
                   <div class="reduce iconfont icon-wuuiconsuoxiao"></div>
-                  <div class="count">11</div>
+                  <div class="count">{{list.buyCount}}</div>
                   <div class="add iconfont icon-wuuiconxiangjifangda"></div>
                 </div>
               </div>
@@ -83,10 +83,14 @@ export default {
       count: 0,
       hasChecked: false,
       // 收货地址信息
-      addressData: wx.getStorageSync('address') || {}
+      addressData: wx.getStorageSync('address') || {},
+      cartData: {}
     }
   },
   onLoad () {
+    // 获取本地存储的商品
+    this.cartData = wx.getStorageSync('cartData')
+    console.log(this.cartData)
     // wx.login({
     //   success (res) {
     //   console.log(11)
@@ -153,6 +157,7 @@ export default {
     }
   },
   computed: {
+    // 判断是否存在本地地址
     hasAddress () {
       if (JSON.stringify(this.addressData) === '{}') {
         return false

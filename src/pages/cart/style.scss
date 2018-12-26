@@ -73,6 +73,9 @@
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          &.hasSelected{
+            color: #ff2d4a;
+          }
           // background-color: #f4f4f4;
         }
         .good-wrapper{
@@ -83,11 +86,15 @@
           border-bottom: 1px solid #f4f4f4;
           .good-img{
             flex-shrink: 0;
-            width: 160rpx;
-            height: 160rpx;
-            overflow: hidden;
+            // width: 160rpx;
+            // height: 160rpx;
+            // overflow: hidden;
             margin-right: 20rpx;
-            background-color: #f4f4f4;
+            // background-color: #f4f4f4;
+            img{
+              width: 160rpx;
+              height: 160rpx;
+            }
           }
           .good-info{
             flex: 1;

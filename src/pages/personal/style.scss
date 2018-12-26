@@ -1,0 +1,67 @@
+.personal-wrapper{
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f4f4f4;
+  .userinfo-wrapper{
+    height: 400rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff2d4a;
+    .user-info{
+      height: 140rpx;
+      width: 330rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding-bottom: 20rpx;
+      .setting,.message{
+        color: #fff;
+        font-size: 20px;
+      }
+      .avator{
+        height: 135rpx;
+        width: 135rpx;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+      .message{
+        color: #fff;
+      }
+    }
+    .user-name{
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+  .content{
+    position: absolute;
+    top: 370rpx;
+    left: 0rpx;
+    width: 750rpx;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 0px 16rpx;
+    .tool-wrapper{
+      display: flex;
+      color: #bbbbbb;
+      font-size: 14px;
+      .tool-list{
+        height: 120rpx;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .count{}
+        .list-name{}
+      }
+    }
+  }
+}

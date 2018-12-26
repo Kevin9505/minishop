@@ -101,7 +101,7 @@ export default {
   methods: {
     // 获取商品详情数据
     getDetailData () {
-      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: 57393})
+      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: this.goods_id})
         .then(res => {
           const {meta} = res.data
           if (meta.status === 200) {
@@ -128,7 +128,6 @@ export default {
         buyGoods[id].buyCount++
       }
       this.totalCount = buyGoods[id].buyCount
-      console.log(this.totalCount)
       // 存入本地
       wx.setStorageSync('cartData', buyGoods)
       // 提示框

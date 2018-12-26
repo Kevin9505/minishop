@@ -1,3 +1,19 @@
+.isempty{
+  display: flex;
+  padding-top: 150rpx;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img{
+    width: 160rpx;
+    height: 160rpx;
+    margin-bottom: 20rpx;
+  }
+  .tips{
+    color: #bbb;
+    font-size: 14px;
+  }
+}
 .cart{
   
   .address-wrapper{
@@ -73,9 +89,6 @@
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          &.hasSelected{
-            color: #ff2d4a;
-          }
           // background-color: #f4f4f4;
         }
         .good-wrapper{
@@ -144,6 +157,10 @@
       }
     }
   }
+  /* 商品选中时的状态 */
+  .hasSelected{
+    color: #ff2d4a;
+  }
   .pay-tool{
     height: 98rpx;
     width: 750rpx;
@@ -159,9 +176,6 @@
       flex: 1;
       display: flex;
       justify-content: space-between;
-      &.checked-padding{
-        padding-right: 20rpx;
-      }
       .select-all{
         font-size: 16px;
         display: flex;
@@ -177,6 +191,7 @@
         }
       }
       .all-price{
+        padding-right: 20rpx;
         .count-wrapper{
           .total{
             font-size: 16px;
@@ -195,6 +210,9 @@
           font-size: 12px;
           color: #bbb;
         }
+        // .checked-padding{
+        //   padding-right: 20rpx;
+        // }
       }
       .delete-wrapper{
         width: 100rpx;

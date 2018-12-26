@@ -29,12 +29,18 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "dev",
-					"pathName": "pages/cart/main",
+					"pathName": "pages/category/main",
+					"query": "goods_id=57396"
+				},
+				{
+					"id": -1,
+					"name": "dev1",
+					"pathName": "pages/detail/main",
 					"query": "goods_id=57396"
 				}
 			]

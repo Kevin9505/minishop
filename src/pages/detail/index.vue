@@ -61,13 +61,13 @@
           <span class="iconfont icon-kefu"></span>
           <span class="server-text">联系客服</span>
         </div>
-        <div class="cart">
+        <navigator url="/pages/cart/main" open-type="switchTab" hover-class="none" class="cart">
           <span class="iconfont icon-gouwuche"></span>
           <div class="cart-text">购物车</div>
-        </div>
+        </navigator>
       </div>
       <div class="shopcart-right">
-        <div class="add-cart">加入购物车</div>
+        <div class="add-cart" @click="handleAddToCart(detailData.goods_id)">加入购物车</div>
         <div class="buy">立即购买</div>
       </div>
     </div>
@@ -83,7 +83,8 @@ export default {
       hasData: false,
       tabList: ['商品介绍', '规格参数', '售后保障'],
       currentIndex: 0,
-      goods_id: ''
+      goods_id: '',
+      cartData: {}
     }
   },
   onLoad (query) {
@@ -99,7 +100,7 @@ export default {
   methods: {
     // 获取商品详情数据
     getDetailData () {
-      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: this.goods_id})
+      request.get('https://itjustfun.cn/api/public/v1/goods/detail', {goods_id: 57394})
         .then(res => {
           const {meta} = res.data
           if (meta.status === 200) {
@@ -109,8 +110,18 @@ export default {
           }
         })
     },
+    // 切换tab栏
     handleChangeTab (index) {
       this.currentIndex = index
+    },
+    handleAddToCart (id) {
+      wx.showToast({
+        title: '添加成功',
+        icon: 'success',
+        duration: 2000
+      })
+      this.cartData[id] = this.detailData
+      wx.setStorageSync('cartData', this.cartData)
     }
   },
   mounted () {

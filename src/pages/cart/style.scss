@@ -22,6 +22,8 @@
         // .name{}
         .phone{
           .more{
+            font-size: 12px;
+            color: #bbb;
             padding: 0 20rpx;
           }
         }
@@ -142,11 +144,12 @@
       flex: 1;
       display: flex;
       justify-content: space-between;
-      padding-right: 20rpx;
+      &.checked-padding{
+        padding-right: 20rpx;
+      }
       .select-all{
         font-size: 16px;
         display: flex;
-        // flex-direction: column;
         align-items: center;
         justify-content: center;
         .checked-icon{
@@ -178,10 +181,19 @@
           color: #bbb;
         }
       }
+      .delete-wrapper{
+        width: 100rpx;
+        height: 98rpx;
+        font-size: 14px;
+        color: #fff;
+        line-height: 98rpx;
+        text-align: center;
+        background-color: #f4b73f;
+      }
     }
     .pay{
       height: 98rpx;
-      width: 230rpx;
+      width: 130rpx;
       line-height: 98rpx;
       text-align: center;
       flex-shrink: 0;

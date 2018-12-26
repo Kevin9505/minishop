@@ -1,5 +1,6 @@
 <template>
   <div class="cart">
+    <!-- 地址 -->
     <div class="address-wrapper">
       <div class="consignee-user">
         <span class="user">收货人: </span>
@@ -7,7 +8,7 @@
           <span class="name">苏</span>
           <span class="phone">
           13535239647
-          <span class="more">></span>
+          <span class="more iconfont icon-you"></span>
           </span>
         </div>
       </div>
@@ -50,7 +51,7 @@
     </div>
     <!-- 支付款 -->
     <div class="pay-tool">
-      <div class="tool-left">
+      <div class="tool-left" :class="{'checked-padding':!hasChecked}">
         <div class="select-all">
           <div class="checked-icon iconfont icon-xuanze"></div>
           <div class="checked-text">全选</div>
@@ -64,6 +65,7 @@
           </div>
           <div class="include-pay">包含运费</div>
         </div>
+        <div class="delete-wrapper" v-if="hasChecked">删除</div> 
       </div>
       <div class="pay">结算(3)</div>
     </div>
@@ -75,7 +77,8 @@ import splitter from '../../components/splitter.vue'
 export default {
   data () {
     return {
-      count: 0
+      count: 0,
+      hasChecked: false
     }
   },
   onLoad () {

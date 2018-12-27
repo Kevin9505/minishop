@@ -6,7 +6,8 @@
     "pages/personal/main",
     "pages/goods_list/main",
     "pages/detail/main",
-    "pages/search/main"],
+    "pages/search/main",
+    "pages/auth/main"],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#ff2d4a",

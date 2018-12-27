@@ -4,7 +4,7 @@
  * @param {参数} methods 请求的类型
  * @param {参数} data 请求的参数
  */
-function request(url, methods = "GET", data = {}) {
+function request(url, methods = "GET", data = {}, header = {}) {
   return new Promise((resolve, reject) => {
     // 显示提示框
     wx.showLoading({
@@ -14,8 +14,9 @@ function request(url, methods = "GET", data = {}) {
     })
     wx.request({
       url: url,
-      methods: methods,
+      method: methods,
       data,
+      header,
       success: (res) => {
         // 隐藏提示框
         wx.hideLoading()
@@ -26,6 +27,23 @@ function request(url, methods = "GET", data = {}) {
 }
 request.get = (url, data) => {
   return request(url, "GET", data)
+}
+
+request.post = (url, data) => {
+  return request(url, "POST", data)
+}
+
+request.auth = (url, data) => {
+  if (!wx.getStorageSync('userToken')) {
+    wx.navigateTo({
+      url: '/pages/auth/main'
+    })
+    return new Promise(() => {})
+  }
+  console.log(11)
+  return request(url, "POST", data, {
+    "Authorization" : wx.getStorageSync('userToken')
+  })
 }
 // 暴露方法接口
 export default request

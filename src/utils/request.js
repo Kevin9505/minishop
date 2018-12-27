@@ -40,7 +40,6 @@ request.auth = (url, data) => {
     })
     return new Promise(() => {})
   }
-  console.log(11)
   return request(url, "POST", data, {
     "Authorization" : wx.getStorageSync('userToken')
   })

@@ -243,7 +243,8 @@ export default {
     },
     // 结算
     handleToPay() {
-      const goods = [];
+      const goods = []
+      const order_detail = []
       Object.keys(this.cartData).forEach(value => {
         const item = this.cartData[value];
         if (item.isSelected) {
@@ -251,7 +252,7 @@ export default {
             goods_id: item.goods_id,
             goods_number: item.buyCount,
             goods_price: item.goods_price
-          });
+          })
         }
       });
       // 构造数据
@@ -265,7 +266,12 @@ export default {
       request
         .auth("https://itjustfun.cn/api/public/v1/my/orders/create", payData)
         .then(res => {
-          console.log(res);
+          const {meta} = res.data
+          if (meta.status === 200) {
+            wx.navigateTo({
+              url: '/pages/enter_order/main'
+            })
+          }
         });
     },
     onGotUserInfo(event) {

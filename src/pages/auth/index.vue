@@ -7,11 +7,15 @@
 import request from '../../utils/request.js'
 export default {
   methods: {
+    // 授权用户
     onGotUserInfo (event) {
+      console.log(event)
       wx.login({
         success(res) {
           if (res.code) {
+            // 解构
             const {detail} = event.mp
+            // 构造数据
             const tokenData = {
               code: res.code,
               encryptedData: detail.encryptedData,
@@ -19,9 +23,11 @@ export default {
               rawData: detail.rawData,
               signature: detail.signature
             }
+            // 发送请求
             request.post('https://itjustfun.cn/api/public/v1/users/wxlogin', tokenData)
               .then(res => {
                 const {token} = res.data.data
+                // 存储token
                 wx.setStorageSync('userToken', token)
                 wx.navigateBack()
               })
